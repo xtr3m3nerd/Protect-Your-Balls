@@ -1,0 +1,142 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://menus/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://menus/Controls/SceneButton.gd" type="Script" id=2]
+[ext_resource path="res://menus/OSLabel.gd" type="Script" id=7]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://assets/fonts/Roboto-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 120
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 2 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://assets/fonts/Roboto-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+outline_size = 7
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="Theme" id=11]
+Button/colors/font_color = Color( 1, 0.537255, 0, 1 )
+Button/colors/font_color_focus = Color( 1, 0.4, 0, 1 )
+Button/colors/font_color_hover = Color( 1, 0.654902, 0, 1 )
+Button/colors/font_color_pressed = Color( 1, 0.0705882, 0, 1 )
+Button/fonts/font = SubResource( 5 )
+Button/styles/disabled = SubResource( 6 )
+Button/styles/focus = SubResource( 7 )
+Button/styles/hover = SubResource( 8 )
+Button/styles/normal = SubResource( 9 )
+Button/styles/pressed = SubResource( 10 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://assets/fonts/Roboto-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=15]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 12 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+expand = true
+
+[node name="Title" type="Control" parent="."]
+anchor_right = 1.0
+margin_bottom = 300.0
+
+[node name="TitleText" type="Label" parent="Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "Protect Your Balls"
+align = 1
+valign = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -198.0
+margin_top = -49.0
+margin_right = 198.0
+margin_bottom = 325.0
+theme = SubResource( 11 )
+
+[node name="StartButton" type="Button" parent="Buttons"]
+margin_right = 396.0
+margin_bottom = 76.0
+focus_neighbour_top = NodePath("../QuitButton")
+text = "Play Game"
+script = ExtResource( 2 )
+scene_to_load = "res://Level.tscn"
+load_type = 1
+
+[node name="OptionsButton" type="Button" parent="Buttons"]
+margin_top = 80.0
+margin_right = 396.0
+margin_bottom = 156.0
+text = "Options"
+script = ExtResource( 2 )
+scene_to_load = "res://menus/OptionsMenu.tscn"
+load_type = 2
+
+[node name="CreditsButton" type="Button" parent="Buttons"]
+margin_top = 160.0
+margin_right = 396.0
+margin_bottom = 236.0
+text = "Credits"
+script = ExtResource( 2 )
+scene_to_load = "res://menus/CreditsMenu.tscn"
+load_type = 2
+
+[node name="QuitButton" type="Button" parent="Buttons"]
+margin_top = 240.0
+margin_right = 396.0
+margin_bottom = 316.0
+focus_neighbour_bottom = NodePath("../StartButton")
+text = "Quit"
+
+[node name="OSLabel" type="Label" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -76.0
+margin_right = 326.0
+custom_fonts/font = SubResource( 15 )
+text = " OS_VALUE"
+script = ExtResource( 7 )
+
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Buttons/OptionsButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]

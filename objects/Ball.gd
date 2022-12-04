@@ -5,17 +5,17 @@ var group = -1
 var radius = 64
 
 func _ready():
-	$Hitbox.connect("popped",self,"pop")
+	var err = $Hitbox.connect("popped",self,"pop")
+	if err:
+		print("could not connect to hitbox: ", err)
 
 func pop():
 	queue_free()
 
 
 func _on_Ball_mouse_entered():
-	print("mouse_entered")
-	MouseManager.set_hovering(true)
+	MouseManager.set_hovering(self)
 
 
 func _on_Ball_mouse_exited():
-	print("mouse_exited")
-	MouseManager.set_hovering(false)
+	MouseManager.set_hovering(null)
