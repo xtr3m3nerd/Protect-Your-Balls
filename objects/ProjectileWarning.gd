@@ -11,6 +11,8 @@ func _ready():
 	pass # Replace with function body.
 
 func destroy():
+	if projectile:
+		projectile.play_noise()
 	queue_free()
 
 func _physics_process(_delta):

@@ -4,8 +4,8 @@ onready var track1: AudioStreamPlayer = $Track1
 onready var track2: AudioStreamPlayer = $Track2
 
 # TODO - replace this with the starting music
-var menu_music = load("res://assets/sounds/music/Music/MainTheme.wav")
-var game_music = load("res://assets/sounds/music/Music/8BitMetal.wav")
+var menu_music = load("res://assets/sounds/music/SwingingLevel.wav")
+var game_music = load("res://assets/sounds/music/FranticLevel.wav")
 
 enum MUSIC { MENU, GAME }
 

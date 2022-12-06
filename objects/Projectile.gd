@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var speed = 400
+var speed = 400.0
 
 var direction: Vector2 = Vector2.ZERO
 var target: Vector2 = Vector2.ZERO
@@ -11,12 +11,21 @@ var warning_inst = null
 
 var is_active = false
 
+var skins = [
+	"res://assets/projectiles/arrow.png",
+	"res://assets/projectiles/rocket.png",
+	"res://assets/projectiles/spatula.png",
+]
+
 func _ready():
+	var skin_idx = randi() % skins.size()
+	$Sprite.texture = load(skins[skin_idx])
 	pass
 	
 func _physics_process(delta):
 	if not is_active:
 		return
+	look_at(transform.origin + direction)
 	var collision: KinematicCollision2D = move_and_collide(direction * speed * delta)
 	if collision != null:
 		print(collision)
@@ -32,6 +41,10 @@ func set_target(_target):
 	direction = (target - global_position).normalized()
 	spawn_warning()
 
+
+func set_speed(_speed):
+	speed = _speed
+
 func destroy():
 	# Where to put destroyed effects and other stuff
 	speed = 0
@@ -44,6 +57,9 @@ func activate():
 
 func _on_AliveTimer_timeout():
 	destroy()
+
+func play_noise():
+	$Noise.play()
 
 func spawn_warning():
 	var space_state = get_world_2d().direct_space_state

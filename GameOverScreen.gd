@@ -1,20 +1,29 @@
 extends Control
 
 func _ready():
-	$TimeBox/Time.text = msec2mmss(Globals.score)
-	$HighScore/Time.text = msec2mmss(Globals.high_score)
-	if Globals.score == Globals.high_score:
+	Globals.save_high_score()
+	$Scores/ScoreBox/Time.text = Globals.sec2mmss(Globals.time)
+	$Scores/ScoreBox/Points.text = str(Globals.score).pad_zeros(6)
+	
+	$Scores/BestTime/Time.text = Globals.sec2mmss(Globals.best_time)
+	$Scores/BestTime/Points.text = str(Globals.best_time_score).pad_zeros(6)
+	
+	$Scores/BestScore/Time.text = Globals.sec2mmss(Globals.best_score_time)
+	$Scores/BestScore/Points.text = str(Globals.best_score).pad_zeros(6)
+	
+	$NewHighScore.hide()
+	if Globals.score == Globals.best_score:
 		$NewHighScore.show()
-	else:
-		$NewHighScore.hide()
+		$Scores/ScoreBox/Points.modulate = Color("fcbc4e")
+		
+	if Globals.time == Globals.best_time:
+		$NewHighScore.show()
+		$Scores/ScoreBox/Time.modulate = Color("fcbc4e")
+		
 
 func _input(_event):
 	if Input.is_action_pressed("restart"):
 		Globals.restart_game()
-
-func msec2mmss(_msecs: int):
-	var msec: int = int(_msecs % 1000)
-	var seconds: int = int(_msecs / 1000.0) % 60
-	var minutes: int = int(_msecs / 60000.0)
-	var mmss_string: String = "%d:%02d.%03d" % [minutes, seconds, msec]
-	return mmss_string
+	
+	if Input.is_action_pressed("quit"):
+		SceneManager.set_current_scene("res://menus/MainMenu.tscn")

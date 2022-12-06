@@ -4,7 +4,7 @@ var last_focus = null
 
 func _ready():
 	last_focus = get_focus_owner()
-	$PanelContainer/Buttons/HBoxContainer/YesButton.grab_focus()
+	$Node2D/PanelContainer/Buttons/HBoxContainer/YesButton.grab_focus()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("exit") and OS.get_name() != "Web":

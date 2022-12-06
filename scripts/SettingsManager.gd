@@ -4,8 +4,8 @@ var config: ConfigFile
 
 var volumes = {
 	"Master": 0.5,
-	"Music": 1.0,
-	"Sfx": 1.0,
+	"Music": 0.5,
+	"Sfx": 0.5,
 }
 
 var is_fullscreen: bool = false

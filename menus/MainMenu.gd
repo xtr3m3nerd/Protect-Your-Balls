@@ -7,6 +7,12 @@ func _ready():
 	if OS.get_name() == "HTML5":
 		$Buttons/QuitButton.hide()
 	MusicManager.play_music(MusicManager.MUSIC.MENU)
+	
+	$Scores/BestTime/Time.text = Globals.sec2mmss(Globals.best_time)
+	$Scores/BestTime/Points.text = str(Globals.best_time_score).pad_zeros(6)
+	
+	$Scores/BestScore/Time.text = Globals.sec2mmss(Globals.best_score_time)
+	$Scores/BestScore/Points.text = str(Globals.best_score).pad_zeros(6)
 
 
 func _on_quit_button_pressed():
